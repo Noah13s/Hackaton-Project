@@ -110,8 +110,8 @@
     <Compile Include="Library\PackageCache\com.unity.xr.core-utils@2.3.0\Runtime\Extensions\PoseExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.core-utils@2.3.0\Runtime\Extensions\CameraExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.core-utils@2.3.0\Runtime\Bindings\Variables\BindableEnum.cs" />
-    <Compile Include="Library\PackageCache\com.unity.xr.core-utils@2.3.0\Runtime\MaterialUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.core-utils@2.3.0\Runtime\GeometryUtils.cs" />
+    <Compile Include="Library\PackageCache\com.unity.xr.core-utils@2.3.0\Runtime\MaterialUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.core-utils@2.3.0\Runtime\ReflectionUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.core-utils@2.3.0\Runtime\Extensions\DictionaryExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.core-utils@2.3.0\Runtime\Datums\DatumProperty.cs" />
@@ -205,6 +205,10 @@
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\Managed\UnityEngine\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
@@ -413,6 +417,14 @@
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

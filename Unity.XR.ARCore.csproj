@@ -63,8 +63,8 @@
     <Compile Include="Library\PackageCache\com.unity.xr.arcore@5.1.5\Runtime\ArPlaybackStatus.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.arcore@5.1.5\Runtime\PointCloud\ARCoreXRPointCloudSubsystem.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.arcore@5.1.5\Runtime\ARCoreSessionSubsystem.cs" />
-    <Compile Include="Library\PackageCache\com.unity.xr.arcore@5.1.5\Runtime\NativeObject.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.arcore@5.1.5\Runtime\ARCoreRaycastSubsystem.cs" />
+    <Compile Include="Library\PackageCache\com.unity.xr.arcore@5.1.5\Runtime\NativeObject.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.arcore@5.1.5\Runtime\ARCoreAnchorSubsystem.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.arcore@5.1.5\Runtime\ARCoreImageTrackingSubsystem.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.arcore@5.1.5\Runtime\ManagedReferenceImage.cs" />
@@ -172,6 +172,10 @@
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\Managed\UnityEngine\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
@@ -380,6 +384,14 @@
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

@@ -101,8 +101,8 @@
     <Compile Include="Library\PackageCache\com.unity.burst@1.8.18\Runtime\Intrinsics\x86\Sse4_2.cs" />
     <Compile Include="Library\PackageCache\com.unity.burst@1.8.18\Runtime\Intrinsics\x86\Bmi1.cs" />
     <Compile Include="Library\PackageCache\com.unity.burst@1.8.18\Runtime\Intrinsics\Common.cs" />
-    <Compile Include="Library\PackageCache\com.unity.burst@1.8.18\Runtime\Intrinsics\x86\Avx.cs" />
     <Compile Include="Library\PackageCache\com.unity.burst@1.8.18\Runtime\CompilerServices\Hint.cs" />
+    <Compile Include="Library\PackageCache\com.unity.burst@1.8.18\Runtime\Intrinsics\x86\Avx.cs" />
     <Compile Include="Library\PackageCache\com.unity.burst@1.8.18\Runtime\CompilerServices\AssumeRangeAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.burst@1.8.18\Runtime\Intrinsics\x86\Common.cs" />
     <Compile Include="Library\PackageCache\com.unity.burst@1.8.18\Runtime\BurstExecutionEnvironment.cs" />
@@ -181,6 +181,10 @@
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\Managed\UnityEngine\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputModule">

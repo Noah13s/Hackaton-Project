@@ -123,8 +123,8 @@
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Inputs\Haptics\OpenXR\OpenXRHapticImpulseChannel.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Utilities\BurstMathUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\UI\TrackedDeviceEventData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Interactables\IXRHoverInteractable.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Filtering\Target\Filters\IXRTargetFilter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Interactables\IXRHoverInteractable.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Filtering\Select\IXRSelectFilter.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Inputs\Haptics\XRInputHapticImpulseProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Interactables\DistanceInfo.cs" />
@@ -255,13 +255,13 @@
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Filtering\Poke\PokeThresholdDatumProperty.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Inputs\Readers\XRInputDeviceBoolValueReader.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\AffordanceSystem\Receiver\Rendering\BlendShapeAffordanceReceiver.cs" />
-    <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Inputs\XRHandSkeletonPokeDisplacer.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Inputs\Simulation\XRDeviceSimulatorSettings.cs" />
+    <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Inputs\XRHandSkeletonPokeDisplacer.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\XRInteractionEvents.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Inputs\Composites\FallbackComposite.cs" />
-    <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\AffordanceSystem\Theme\Primitives\Vector3AffordanceThemeDatum.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Utilities\Collections\NativeCurve.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Locomotion\Legacy\ActionBasedContinuousMoveProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\AffordanceSystem\Theme\Primitives\Vector3AffordanceThemeDatum.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\AffordanceSystem\Receiver\Rendering\Vector3MaterialPropertyAffordanceReceiver.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Interactables\Visuals\XRTintInteractableVisual.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Controllers\ActionBasedController.cs" />
@@ -324,8 +324,8 @@
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Transformers\XRBaseGrabTransformer.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\AffordanceSystem\Receiver\Audio\AudioAffordanceReceiver.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Interactors\Casters\ICurveInteractionCaster.cs" />
-    <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Utilities\SmallRegistrationList.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Locomotion\Teleportation\TeleportVolumeDestinationSettingsDatumProperty.cs" />
+    <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Utilities\SmallRegistrationList.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\AR\Gestures\TapGesture.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\Interaction\Interactors\NearFarInteractor.cs" />
     <Compile Include="Library\PackageCache\com.unity.xr.interaction.toolkit@3.0.5\Runtime\AffordanceSystem\Rendering\MaterialHelperBase.cs" />
@@ -482,6 +482,10 @@
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\Managed\UnityEngine\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
@@ -690,6 +694,14 @@
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

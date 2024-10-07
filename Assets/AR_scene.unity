@@ -347,10 +347,6 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 569996954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 207.29999, y: 0}
@@ -800,7 +796,6 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
   m_IsActive: 0
 --- !u!224 &569996954
 RectTransform:
@@ -1328,10 +1323,6 @@ MonoBehaviour:
   outputText: {fileID: 1377920736}
 >>>>>>> Stashed changes
   openAIUrl: https://api.openai.com/v1/chat/completions
-  apiKey: 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
-  imageUrls:
-  - https://m.media-amazon.com/images/I/51Bp30CR3IL.jpg
-  queryMessage: What are in these images? Is there any difference between them?
   queryMessage: You are a sustainability consultant with a strong background in analyzing
     the environmental impact of products. Respond in JSON format with only two variables,
     CO2 emmision estimate number and the name of the main product seen.
