@@ -610,35 +610,23 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1369621335}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_clip
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
-      - m_Target: {fileID: 1369621335}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
-      - m_Target: {fileID: 1369621335}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 6155495a03119344886b918cb60ce5b7, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 827000410}
+        m_TargetAssemblyTypeName: AIVision, Assembly-CSharp
+        m_MethodName: OnClickSend
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1028,37 +1016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395f289580f1c9649930f7c0925486ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHits: 0
-  coins: 0
-  startPosition: {fileID: 0}
-  playerPrefab: {fileID: 2625892445902664497, guid: 83c95246d2645664591416bffe341664, type: 3}
-  ballInHole:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6346906690389790750}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 698667729}
-        m_TargetAssemblyTypeName: AR_Manager, Assembly-CSharp
-        m_MethodName: ARBallInHole
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!4 &698667728
 Transform:
   m_ObjectHideFlags: 0
@@ -1086,7 +1043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23d1996d91868a40a2a28fbc2cbbf53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 639370472}
 --- !u!1 &710684964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,6 +1176,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710684964}
   m_CullTransparentMesh: 1
+--- !u!1 &827000409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827000411}
+  - component: {fileID: 827000410}
+  m_Layer: 0
+  m_Name: AIVision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &827000410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827000409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f42ed844705f734bbc9e3be3088fd3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openAIUrl: https://api.openai.com/v1/chat/completions
+  apiKey: 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
+  imageUrls:
+  - https://m.media-amazon.com/images/I/51Bp30CR3IL.jpg
+  queryMessage: What are in these images? Is there any difference between them?
+--- !u!4 &827000411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827000409}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 958.10345, y: 1493.7977, z: -48.441612}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &934089263
 GameObject:
   m_ObjectHideFlags: 0
@@ -4888,3 +4893,4 @@ SceneRoots:
   - {fileID: 698667728}
   - {fileID: 1045567395}
   - {fileID: 1369621336}
+  - {fileID: 827000411}
