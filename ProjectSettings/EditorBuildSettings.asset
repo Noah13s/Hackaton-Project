@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/AR_scene.unity
     guid: 3244b659eb7ea8944bd9906857ee33b1
-  - enabled: 1
+  - enabled: 0
     path: Assets/MP_Connection_Setup.unity
     guid: ee5726add645303429ec54ac1030c761
   m_configObjects:
