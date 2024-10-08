@@ -66,9 +66,12 @@
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Scripts\ARManipulator.cs" />
     <Compile Include="Assets\ButtonScript.cs" />
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Scripts\ARSpawner.cs" />
+    <Compile Include="Assets\trashObject.cs" />
     <Compile Include="Assets\AIVision.cs" />
     <Compile Include="Assets\NetworkManagerUI.cs" />
+    <Compile Include="Assets\Spawn.cs" />
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Misc\ARInputActions.cs" />
+    <Compile Include="Assets\ARDelete.cs" />
     <Compile Include="Assets\Counter.cs" />
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Misc\ARSetup.cs" />
   </ItemGroup>
