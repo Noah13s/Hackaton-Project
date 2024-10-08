@@ -64,6 +64,7 @@
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Scripts\ARPlayer.cs" />
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Misc\ARFeatheredPlaneMeshVisualizer.cs" />
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Scripts\ARManipulator.cs" />
+    <Compile Include="Assets\MPTimer.cs" />
     <Compile Include="Assets\ButtonScript.cs" />
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Scripts\ARSpawner.cs" />
     <Compile Include="Assets\trashObject.cs" />

@@ -38,6 +38,12 @@ public class Master_Counter2 : MonoBehaviour
         counterValueStrg = counterValue.ToString();
     }
 
+    public void AddToCounter(int value)
+    {
+        counterValue=counterValue + value;
+        counterValueStrg = counterValue.ToString();
+    }
+
     [ContextMenu("DecrementCounter")]
     public void DecrementCounter()
     {
