@@ -15,6 +15,7 @@ public class NetworkManagerUI : MonoBehaviour
     public InputField ipInputField; // Eingabefeld für die IP-Adresse
     public Text hostIpText;         // Text für die Host-IP-Anzeige
     public Text statusText;         // Text für den Verbindungsstatus (z.B. "Connected")
+    public Text waitForHostText;    // Text, der anzeigt, dass der Client auf den Host wartet
 
     private UnityTransport transport;
     private MultiplayerTimer multiplayerTimer; // Referenz auf das MultiplayerTimer-Skript
@@ -43,6 +44,7 @@ public class NetworkManagerUI : MonoBehaviour
         backButton.gameObject.SetActive(false);    // Back-Button versteckt
         startButton.gameObject.SetActive(false);   // Start-Button versteckt (Host-only)
         statusText.gameObject.SetActive(false);    // Status-Text versteckt
+        waitForHostText.gameObject.SetActive(false);  // Text, der auf den Host wartet, versteckt
     }
 
     public void StartHost()
@@ -94,6 +96,9 @@ public class NetworkManagerUI : MonoBehaviour
             ipInputField.gameObject.SetActive(false);
             enterButton.gameObject.SetActive(false);
 
+            // Zeige den Text "Wait for host to start the game"
+            waitForHostText.gameObject.SetActive(true);
+
             // Starte Überprüfung für "connected"
             StartCoroutine(CheckForConnection());
         }
@@ -122,6 +127,7 @@ public class NetworkManagerUI : MonoBehaviour
         backButton.gameObject.SetActive(false);  // Back-Button ausblenden
         startButton.gameObject.SetActive(false); // Start-Button ausblenden
         statusText.gameObject.SetActive(false);  // Status-Text ausblenden
+        waitForHostText.gameObject.SetActive(false);  // Warte-Text ausblenden
 
         // Stoppe die "Connection working"-Überprüfung
         StopCoroutine(CheckForConnection());
@@ -141,20 +147,10 @@ public class NetworkManagerUI : MonoBehaviour
     {
         while (true)
         {
-            if (NetworkManager.Singleton.IsHost)
+            // Nur der Host soll den Start-Button sehen, wenn mindestens 2 Spieler verbunden sind
+            if (NetworkManager.Singleton.IsHost && NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
             {
-                isHostConnected = true;  // Host ist verbunden
-            }
-
-            if (NetworkManager.Singleton.IsConnectedClient)
-            {
-                isClientConnected = true;  // Client ist verbunden
-            }
-
-            // Nur der Host soll den Start-Button sehen, wenn beide verbunden sind
-            if (isHostConnected && isClientConnected && NetworkManager.Singleton.IsHost)
-            {
-                startButton.gameObject.SetActive(true); // Zeige den Start-Button nur für den Host
+                startButton.gameObject.SetActive(true); // Zeige den Start-Button nur für den Host, wenn mindestens 2 Spieler verbunden sind
                 yield break;
             }
 
@@ -165,14 +161,15 @@ public class NetworkManagerUI : MonoBehaviour
     // Startet den Timer, wenn der Start-Button gedrückt wird (nur für den Host)
     public void StartTimer()
     {
-        if (isHostConnected && isClientConnected)
+        if (NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
         {
             multiplayerTimer.StartTimer(); // Timer wird gestartet
             startButton.gameObject.SetActive(false); // Start-Button ausblenden nach Klick
+            waitForHostText.gameObject.SetActive(false);  // Verstecke den Warte-Text beim Client
         }
         else
         {
-            Debug.LogError("Host und Client müssen verbunden sein, bevor das Spiel gestartet werden kann.");
+            Debug.LogError("Mindestens zwei Spieler müssen verbunden sein, bevor das Spiel gestartet werden kann.");
         }
     }
 
