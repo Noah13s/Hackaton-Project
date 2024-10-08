@@ -8,6 +8,7 @@ public class ObjectSpawner : MonoBehaviour
     public Transform[] spawnPoints; // Array of possible spawn points (3 points)
     public float fallSpeed = 2f; // Speed at which objects fall down
     public float spawnInterval = 3f; // Time interval between spawns
+    public float groundYPosition = 0f; // Y position representing the ground level
 
     private void Start()
     {
@@ -43,8 +44,8 @@ public class ObjectSpawner : MonoBehaviour
 
     private IEnumerator FallDown(GameObject fallingObject)
     {
-        // As long as the object exists, make it fall down slowly
-        while (fallingObject != null)
+        // As long as the object exists and hasn't reached the ground, make it fall down slowly
+        while (fallingObject != null && fallingObject.transform.position.y > groundYPosition)
         {
             fallingObject.transform.position += Vector3.down * fallSpeed * Time.deltaTime;
 

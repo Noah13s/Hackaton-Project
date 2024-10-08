@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 722460496}
   - component: {fileID: 722460495}
   - component: {fileID: 722460494}
+  - component: {fileID: 722460498}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -191,7 +192,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &722460495
@@ -259,6 +260,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &722460498
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722460493}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1152294986
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,27 +471,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToSpawn:
-  - {fileID: 919132149155446097, guid: bc5bf993900624d9da88f2725eedaa3d, type: 3}
-  - {fileID: 919132149155446097, guid: 89340e7e1e0544377b71bb9dbeb8847d, type: 3}
-  - {fileID: 5937273948675011507, guid: abc4f326eec2f43409d56f4da2dd7e57, type: 3}
-  - {fileID: 3591227079652481357, guid: f17a2efc647c846dc8cd32f6ebfa25b3, type: 3}
-  - {fileID: 919132149155446097, guid: 22274b2b290cf4e05ae4b37386596b3f, type: 3}
-  - {fileID: 919132149155446097, guid: 354b34806db26439bb78d9dcfd77f9f7, type: 3}
-  - {fileID: 919132149155446097, guid: 189a3305ce3094cfa9ab790693184887, type: 3}
-  - {fileID: 919132149155446097, guid: 626b1b85bf65f4f31a99ee26ed650db9, type: 3}
-  - {fileID: 919132149155446097, guid: 90eb92c95170c41af972c87b1f6110aa, type: 3}
-  - {fileID: 919132149155446097, guid: d41bd6cd0fc4d43be9e9e4ac7020dbf3, type: 3}
-  - {fileID: 3591227079652481357, guid: f17a2efc647c846dc8cd32f6ebfa25b3, type: 3}
-  - {fileID: 8589492286623319554, guid: dee627d7cdfb94bf28ce6cdb56c1b73a, type: 3}
-  - {fileID: 919132149155446097, guid: a201ca9d3d7fa4b1caad7b9eb400b79b, type: 3}
-  - {fileID: 6534437677966789356, guid: c2756eb0dcfcb49e8b44b86f8ea1dee5, type: 3}
-  - {fileID: 919132149155446097, guid: a18480be4105b4d04a79057deef89026, type: 3}
+  - {fileID: 2662422288253898280, guid: 781bfd5a468bb4447bd0cc7090e67598, type: 3}
+  - {fileID: 3555786255246414620, guid: e99b48f7e65f740cc8251601b14c9f5c, type: 3}
+  - {fileID: 4603158456386487576, guid: 1613e7ecab39e434e8e539bb73d885b5, type: 3}
+  - {fileID: 2836294145318722855, guid: 5b8c3eaffe6d9430096ef1bf1d037592, type: 3}
+  - {fileID: 6081077015714379186, guid: b4a5d5fd46a5f4276b304c3091f6d94b, type: 3}
+  - {fileID: 7201831189109487795, guid: c003c006cf4cd4638a71702ed6874b6b, type: 3}
+  - {fileID: 8701123716057573281, guid: 84cdd13b298a44ad1803fca7e1e6766a, type: 3}
+  - {fileID: 2594293175086137120, guid: 90a26b9cd21fc4bfca452c8fa6fa28b4, type: 3}
+  - {fileID: 8984128036983651987, guid: 86f5069478ac344678e9b97d78979711, type: 3}
+  - {fileID: 2670143598090430200, guid: 89a694a8104c9440da4bac6ecd2c9d16, type: 3}
+  - {fileID: 6056511246152279293, guid: 0dbf34333a6794f7ca5dfe230671475d, type: 3}
+  - {fileID: 6643229236698058098, guid: cf47eb823ab2845de809b25e2e761b8e, type: 3}
+  - {fileID: 3394112223576861148, guid: 85c2ddfce7d9445c59f3a0f3e1bd7728, type: 3}
   spawnPoints:
   - {fileID: 231756529}
   - {fileID: 1739252187}
   - {fileID: 1271073869}
   fallSpeed: 2
   spawnInterval: 3
+  groundYPosition: 0
 --- !u!4 &1907060591
 Transform:
   m_ObjectHideFlags: 0
