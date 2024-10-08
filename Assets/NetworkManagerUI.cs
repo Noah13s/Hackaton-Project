@@ -11,13 +11,15 @@ public class NetworkManagerUI : MonoBehaviour
     public Button clientButton;     // Button für den Client
     public Button backButton;       // Button zum Zurückkehren zur Auswahl
     public Button enterButton;      // Button zum Verbinden nach Eingabe der IP
+    public Button startButton;      // Button zum Starten des Timers
     public InputField ipInputField; // Eingabefeld für die IP-Adresse
     public Text hostIpText;         // Text für die Host-IP-Anzeige
     public Text statusText;         // Text für den Verbindungsstatus (z.B. "Connected")
 
     private UnityTransport transport;
     private MultiplayerTimer multiplayerTimer; // Referenz auf das MultiplayerTimer-Skript
-    private bool isConnected = false;
+    private bool isHostConnected = false;
+    private bool isClientConnected = false;
 
     void Start()
     {
@@ -31,13 +33,15 @@ public class NetworkManagerUI : MonoBehaviour
         hostButton.onClick.AddListener(StartHost);
         clientButton.onClick.AddListener(ShowClientInput);
         backButton.onClick.AddListener(BackToMenu);
-        enterButton.onClick.AddListener(StartClient);  // Enter-Button Listener
+        enterButton.onClick.AddListener(StartClient);
+        startButton.onClick.AddListener(StartTimer);
 
         // Initialer Zustand: Host- und Client-Buttons sichtbar, andere Elemente versteckt
         ipInputField.gameObject.SetActive(false);  // IP-Eingabefeld versteckt
         enterButton.gameObject.SetActive(false);   // Enter-Button versteckt
         hostIpText.gameObject.SetActive(false);    // Host-IP-Anzeige versteckt
         backButton.gameObject.SetActive(false);    // Back-Button versteckt
+        startButton.gameObject.SetActive(false);   // Start-Button versteckt
         statusText.gameObject.SetActive(false);    // Status-Text versteckt
     }
 
@@ -116,6 +120,7 @@ public class NetworkManagerUI : MonoBehaviour
         hostIpText.gameObject.SetActive(false);
         enterButton.gameObject.SetActive(false);
         backButton.gameObject.SetActive(false);  // Back-Button ausblenden
+        startButton.gameObject.SetActive(false); // Start-Button ausblenden
         statusText.gameObject.SetActive(false);  // Status-Text ausblenden
 
         // Stoppe die "Connection working"-Überprüfung
@@ -136,41 +141,38 @@ public class NetworkManagerUI : MonoBehaviour
     {
         while (true)
         {
-            // Warte auf den Verbindungsaufbau
-            if (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost)
+            if (NetworkManager.Singleton.IsHost)
             {
-                // Setze den Verbindungsstatus
-                isConnected = true;
+                isHostConnected = true;  // Host ist verbunden
+            }
 
-                // Zeige "Connected" für 2 Sekunden
-                statusText.text = "Connected";
-                statusText.gameObject.SetActive(true);
+            if (NetworkManager.Singleton.IsConnectedClient)
+            {
+                isClientConnected = true;  // Client ist verbunden
+            }
 
-                yield return new WaitForSeconds(2f);
-                statusText.gameObject.SetActive(false);
-
-                // Starte den Timer sobald die Verbindung hergestellt ist
-                if (NetworkManager.Singleton.IsHost)
-                {
-                    multiplayerTimer.StartTimer(); // Timer erst starten wenn Client connected ist
-                }
-
-                // Starte die "Connection working"-Überprüfung
-                StartCoroutine(ConnectionWorkingLog());
-                yield break; // Beende die Schleife, da die Verbindung hergestellt wurde
+            if (isHostConnected && isClientConnected)
+            {
+                // Wenn beide verbunden sind, zeige den Start-Button
+                startButton.gameObject.SetActive(true);
+                yield break;
             }
 
             yield return null;
         }
     }
 
-    // Coroutine zum Protokollieren von "Connection working" alle 10 Sekunden
-    private IEnumerator ConnectionWorkingLog()
+    // Startet den Timer, wenn der Start-Button gedrückt wird
+    public void StartTimer()
     {
-        while (isConnected)
+        if (isHostConnected && isClientConnected)
         {
-            Debug.Log("Connection working");
-            yield return new WaitForSeconds(10f);
+            multiplayerTimer.StartTimer(); // Timer wird gestartet
+            startButton.gameObject.SetActive(false); // Start-Button ausblenden nach Klick
+        }
+        else
+        {
+            Debug.LogError("Host und Client müssen verbunden sein, bevor das Spiel gestartet werden kann.");
         }
     }
 
