@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Netcode;
@@ -17,39 +19,33 @@ public class MultiplayerTimer : NetworkBehaviour
 
     private bool isGameOver = false;
 
-    // Referenz auf das NetworkManagerUI-Skript
-    private NetworkManagerUI networkManagerUI;
-
     void Start()
     {
-        // Finde das NetworkManagerUI-Skript in der Szene
-        networkManagerUI = FindObjectOfType<NetworkManagerUI>();
-
         // Wenn es ein Host ist, setze den Timer auf den Startwert
         if (IsServer)
         {
             if (countDown)
-                currentTime.Value = timerLimit; // Wenn der Timer herunterzählen soll
+                currentTime.Value = timerLimit; // Wenn der Timer herunterz�hlen soll
             else
-                currentTime.Value = 0f; // Wenn der Timer hochzählen soll
+                currentTime.Value = 0f; // Wenn der Timer hochz�hlen soll
         }
     }
 
     void Update()
     {
-        // Prüfe, ob die Verbindung besteht und der Timer auf dem Server läuft
-        if (networkManagerUI != null && networkManagerUI.isConnected && IsServer && !isGameOver)
+        // Nur der Host steuert den Timer
+        if (IsServer && !isGameOver)
         {
-            // Zähle den Timer herunter oder hoch
+            // Z�hle den Timer herunter oder hoch
             currentTime.Value = countDown ? currentTime.Value -= Time.deltaTime : currentTime.Value += Time.deltaTime;
 
-            // Überprüfe, ob der Timer das Limit erreicht hat
+            // �berpr�fe, ob der Timer das Limit erreicht hat
             if (hasLimit && ((countDown && currentTime.Value <= 0f) || (!countDown && currentTime.Value >= timerLimit)))
             {
-                // Wenn das Limit erreicht ist, stelle sicher, dass der Timer nicht weiterläuft
+                // Wenn das Limit erreicht ist, stelle sicher, dass der Timer nicht weiterl�uft
                 currentTime.Value = countDown ? 0f : timerLimit;
 
-                // Zeige Game Over auf beiden Geräten
+                // Zeige Game Over auf beiden Ger�ten
                 GameOverClientRpc();
 
                 // Timer deaktivieren
@@ -71,7 +67,7 @@ public class MultiplayerTimer : NetworkBehaviour
     [ClientRpc]
     void GameOverClientRpc()
     {
-        // Zeige "Game Over" auf beiden Geräten an
+        // Zeige "Game Over" auf beiden Ger�ten an
         timerText.text = "Game Over";
         timerText.color = Color.red;
 

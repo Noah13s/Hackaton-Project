@@ -17,7 +17,7 @@ public class NetworkManagerUI : MonoBehaviour
 
     private UnityTransport transport;
 
-    public bool isConnected = false;
+    private bool isConnected = false;
 
     void Start()
     {
