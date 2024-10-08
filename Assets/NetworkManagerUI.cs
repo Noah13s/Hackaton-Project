@@ -7,13 +7,13 @@ using Unity.Netcode.Transports.UTP;
 
 public class NetworkManagerUI : MonoBehaviour
 {
-    public Button hostButton;       // Button f�r den Host
-    public Button clientButton;     // Button f�r den Client
-    public Button backButton;       // Button zum Zur�ckkehren zur Auswahl
+    public Button hostButton;       // Button für den Host
+    public Button clientButton;     // Button für den Client
+    public Button backButton;       // Button zum Zurückkehren zur Auswahl
     public Button enterButton;      // Button zum Verbinden nach Eingabe der IP
-    public InputField ipInputField; // Eingabefeld f�r die IP-Adresse
-    public Text hostIpText;         // Text f�r die Host-IP-Anzeige
-    public Text statusText;         // Text f�r den Verbindungsstatus (z.B. "Connected")
+    public InputField ipInputField; // Eingabefeld für die IP-Adresse
+    public Text hostIpText;         // Text für die Host-IP-Anzeige
+    public Text statusText;         // Text für den Verbindungsstatus (z.B. "Connected")
 
     private UnityTransport transport;
     private MultiplayerTimer multiplayerTimer; // Referenz auf das MultiplayerTimer-Skript
@@ -57,13 +57,13 @@ public class NetworkManagerUI : MonoBehaviour
         // Back-Button anzeigen
         backButton.gameObject.SetActive(true);
 
-        // Starte �berpr�fung f�r "connected"
+        // Starte Überprüfung für "connected"
         StartCoroutine(CheckForConnection());
     }
 
     public void ShowClientInput()
     {
-        // Zeige das IP-Eingabefeld und den Enter-Button, nachdem der Client-Button gedr�ckt wurde
+        // Zeige das IP-Eingabefeld und den Enter-Button, nachdem der Client-Button gedrückt wurde
         ipInputField.gameObject.SetActive(true);
         enterButton.gameObject.SetActive(true);
 
@@ -90,28 +90,24 @@ public class NetworkManagerUI : MonoBehaviour
             ipInputField.gameObject.SetActive(false);
             enterButton.gameObject.SetActive(false);
 
-            // Starte �berpr�fung f�r "connected"
+            // Starte Überprüfung für "connected"
             StartCoroutine(CheckForConnection());
         }
         else
         {
-            Debug.LogError("Bitte eine g�ltige IP-Adresse eingeben.");
+            Debug.LogError("Bitte eine gültige IP-Adresse eingeben.");
         }
     }
 
     public void BackToMenu()
     {
         // Beende den Host oder den Client, falls sie laufen
-        if (NetworkManager.Singleton.IsHost)
-        {
-            NetworkManager.Singleton.Shutdown();
-        }
-        else if (NetworkManager.Singleton.IsClient)
+        if (NetworkManager.Singleton.IsHost || NetworkManager.Singleton.IsClient)
         {
             NetworkManager.Singleton.Shutdown();
         }
 
-        // Zur�ck zur Host/Client-Auswahl
+        // Zurück zur Host/Client-Auswahl
         hostButton.gameObject.SetActive(true);
         clientButton.gameObject.SetActive(true);
 
@@ -122,11 +118,20 @@ public class NetworkManagerUI : MonoBehaviour
         backButton.gameObject.SetActive(false);  // Back-Button ausblenden
         statusText.gameObject.SetActive(false);  // Status-Text ausblenden
 
-        // Stoppe die "Connection working"-�berpr�fung
+        // Stoppe die "Connection working"-Überprüfung
         StopCoroutine(CheckForConnection());
     }
 
-    // Coroutine zur �berpr�fung, ob die Verbindung hergestellt ist
+    // Verbindung beenden, wenn das Spiel geschlossen wird
+    private void OnApplicationQuit()
+    {
+        if (NetworkManager.Singleton != null && (NetworkManager.Singleton.IsHost || NetworkManager.Singleton.IsClient))
+        {
+            NetworkManager.Singleton.Shutdown(); // Beendet die Verbindung bei Spielende
+        }
+    }
+
+    // Coroutine zur Überprüfung, ob die Verbindung hergestellt ist
     private IEnumerator CheckForConnection()
     {
         while (true)
@@ -137,7 +142,7 @@ public class NetworkManagerUI : MonoBehaviour
                 // Setze den Verbindungsstatus
                 isConnected = true;
 
-                // Zeige "Connected" f�r 2 Sekunden
+                // Zeige "Connected" für 2 Sekunden
                 statusText.text = "Connected";
                 statusText.gameObject.SetActive(true);
 
@@ -147,10 +152,10 @@ public class NetworkManagerUI : MonoBehaviour
                 // Starte den Timer sobald die Verbindung hergestellt ist
                 if (NetworkManager.Singleton.IsHost)
                 {
-                    multiplayerTimer.StartTimer();
+                    multiplayerTimer.StartTimer(); // Timer erst starten wenn Client connected ist
                 }
 
-                // Starte die "Connection working"-�berpr�fung
+                // Starte die "Connection working"-Überprüfung
                 StartCoroutine(ConnectionWorkingLog());
                 yield break; // Beende die Schleife, da die Verbindung hergestellt wurde
             }
