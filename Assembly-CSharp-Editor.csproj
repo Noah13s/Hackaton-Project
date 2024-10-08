@@ -412,6 +412,14 @@
       <HintPath>D:\Softwares\Unity Editor\2022.3.49f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
@@ -962,6 +970,10 @@
       <Project>{12A5B663-28C1-293B-5CD3-A67A5E0ABB97}</Project>
       <Name>Unity.XR.ARFoundation.VisualScripting.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Networking.Transport.csproj">
+      <Project>{B4FC4091-1AF5-B988-4B71-696BBB81FC15}</Project>
+      <Name>Unity.Networking.Transport</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.XR.ARSubsystems.Editor.csproj">
       <Project>{5FD25B39-AD08-CAD7-CA55-414D330FD08B}</Project>
       <Name>Unity.XR.ARSubsystems.Editor</Name>
@@ -977,6 +989,10 @@
     <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
       <Project>{7B9752B0-2160-64BE-9BE6-A5AE99AD5946}</Project>
       <Name>Unity.RenderPipelines.Core.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Netcode.Components.csproj">
+      <Project>{32FDDC69-29F7-0656-4FE6-F973DC4BC22A}</Project>
+      <Name>Unity.Netcode.Components</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Mathematics.Editor.csproj">
       <Project>{84B73B27-8837-73E8-7499-1031B9C7175F}</Project>
@@ -998,6 +1014,10 @@
       <Project>{A047E165-0310-9935-799A-B830DB989B62}</Project>
       <Name>Unity.XR.Simulation</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Netcode.Editor.csproj">
+      <Project>{6A4C0318-5F93-F395-1E34-576B7E5DB1BC}</Project>
+      <Name>Unity.Netcode.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.XR.ARSubsystems.csproj">
       <Project>{872D8BDB-30F6-FEB7-C3F0-621B11209F14}</Project>
       <Name>Unity.XR.ARSubsystems</Name>
@@ -1010,6 +1030,14 @@
       <Project>{C30B6611-DEE3-C604-2F8D-2319DE91FF0E}</Project>
       <Name>Unity.XR.Management.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Collections.csproj">
+      <Project>{C8C3EC0E-8AE0-C0C0-B1FD-1BB5E885C8F5}</Project>
+      <Name>Unity.Collections</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Netcode.Runtime.csproj">
+      <Project>{8FE58AE5-25DC-64D1-B62E-B32D347B36B6}</Project>
+      <Name>Unity.Netcode.Runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.XR.ARFoundation.VisualScripting.csproj">
       <Project>{F9B0E17B-CE99-3D6E-8B63-D611DF31832B}</Project>
       <Name>Unity.XR.ARFoundation.VisualScripting</Name>
@@ -1017,6 +1045,10 @@
     <ProjectReference Include="Unity.XR.ARCore.Editor.csproj">
       <Project>{29A2CCF6-67AB-423C-A4F6-EA486871CB18}</Project>
       <Name>Unity.XR.ARCore.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Netcode.Editor.PackageChecker.csproj">
+      <Project>{3E0CBBA6-F9EB-1D80-9D3B-1F4055F4664B}</Project>
+      <Name>Unity.Netcode.Editor.PackageChecker</Name>
     </ProjectReference>
     <ProjectReference Include="PPv2URPConverters.csproj">
       <Project>{2E1F48DE-5711-219F-5CAF-9879128BB0DC}</Project>
@@ -1125,6 +1157,10 @@
     <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj">
       <Project>{6693EC27-DF76-B772-6571-7852BD099A37}</Project>
       <Name>Unity.RenderPipelines.Universal.Shaders</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Networking.Editor.csproj">
+      <Project>{69A96C20-30FB-37A6-9349-4AC7F582F8E2}</Project>
+      <Name>Unity.Networking.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{726211FD-14AB-7C05-AD46-A2EB22C7BCFC}</Project>

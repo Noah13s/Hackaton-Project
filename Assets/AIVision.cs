@@ -4,109 +4,15 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Text;
 using TMPro;
+using System.Net;
+
 
 public class AIVision : MonoBehaviour
 {
     public Camera targetCamera; // Reference to the camera you want to render
     public RenderTexture renderTexture; // Reference to the RenderTexture to draw to
     public TextMeshProUGUI outputText;
-
-    private string customQuery = @"
-
-    You are a sustainability consultant with a strong background in analyzing the environmental impact of products. Your expertise lies in assessing the carbon footprint and sustainability attributes of consumer items. You have in-depth knowledge of life cycle assessment methodologies and can accurately estimate the CO2 emissions associated with the production, transportation, and energy use of a product. You are skilled in identifying materials used in the construction of items and understanding their environmental implications. With your experience, you can generate a JSON-like output that aligns precisely with the specified schema, providing detailed information on the estimated CO2 emissions, recyclability score, expected lifespan, practical suggestions for reducing environmental impact, and ways to offset the carbon footprint of the product. Your ability to analyze and communicate complex environmental data makes you the ideal agent to handle this task effectively and efficiently.
-
-Let's think step by step:
-1. Analyze the visible attributes of the product, such as the type of item, brand, model, and main materials used in its construction.
-2. Estimate the CO2 emissions associated with the production and transportation of the product based on the materials used and manufacturing processes.
-3. Calculate the estimated lifetime energy use emissions by assuming a lifespan of 4 years with 8 hours of use every day for electronic devices.
-4. Combine the estimated CO2 emissions from production, transportation, and energy use to determine the total carbon footprint of the product.
-5. Provide a comparative benchmark statement suggesting ways to reduce energy use or emissions related to the product for sustainability purposes.
-6. Evaluate the recyclability score of the product based on the materials used and their potential for recycling.
-7. Determine the expected lifespan of the product to understand its durability and longevity.
-8. Offer practical suggestions for users to reduce their environmental impact when using or disposing of the product.
-9. Suggest ways for users to offset the carbon footprint of the product through tree planting (return only the number of trees).
-10. Ensure that the JSON-like output aligns precisely with the specified schema to provide detailed information on the product's environmental impact and sustainability attributes.
-
-{
-  ""title"": ""Product CO2 Emissions Schema"",
-  ""type"": ""object"",
-  ""properties"": {
-    ""object"": {
-      ""type"": ""string"",
-      ""description"": ""Type of the item (e.g., laptop, bottle).""
-    },
-    ""brand"": {
-      ""type"": ""string"",
-      ""description"": ""Brand name of the product.""
-    },
-    ""model"": {
-      ""type"": ""string"",
-      ""description"": ""Model name or number (if applicable).""
-    },
-    ""material"": {
-      ""type"": ""string"",
-      ""description"": ""Main materials used in the product’s construction.""
-    },
-    ""estimated_CO2_emissions"": {
-      ""type"": ""object"",
-      ""properties"": {
-        ""production"": {
-          ""type"": ""string"",
-          ""description"": ""Estimated CO2 emissions from production (in kg).""
-        },
-        ""transportation"": {
-          ""type"": ""string"",
-          ""description"": ""Estimated CO2 emissions from transportation (in kg).""
-        },
-        ""energy_use"": {
-          ""type"": ""string"",
-          ""description"": ""Estimated lifetime energy use emissions (in kg).""
-        },
-        ""total"": {
-          ""type"": ""string"",
-          ""description"": ""Total estimated CO2 emissions combining all the above.""
-        }
-      },
-      ""required"": [""production"", ""transportation"", ""energy_use"", ""total""]
-    },
-    ""comparative_benchmark"": {
-      ""type"": ""string"",
-      ""description"": ""A statement suggesting ways to reduce energy use or emissions related to the product.""
-    },
-    ""recyclability_score"": {
-      ""type"": ""string"",
-      ""description"": ""Estimated recyclability percentage of the product.""
-    },
-    ""estimated_lifespan"": {
-      ""type"": ""string"",
-      ""description"": ""Expected lifespan of the product (in years).""
-    },
-    ""suggestions"": {
-      ""type"": ""array"",
-      ""items"": {
-        ""type"": ""string""
-      },
-      ""description"": ""A list of practical suggestions for users to reduce their environmental impact.""
-    },
-    ""carbon_offset"": {
-      ""type"": ""int"",
-      ""description"": ""A statement on how users can offset the carbon footprint of the product.""
-    }
-  },
-  ""required"": [
-    ""object"",
-    ""brand"",
-    ""model"",
-    ""material"",
-    ""estimated_CO2_emissions"",
-    ""comparative_benchmark"",
-    ""recyclability_score"",
-    ""estimated_lifespan"",
-    ""suggestions"",
-    ""carbon_offset""
-  ]
-}
-";
+    public Master_Counter2 counter;
 
     [SerializeField] private string openAIUrl = "https://api.openai.com/v1/chat/completions";
     [SerializeField] private string apiKey = "YOUR_API_KEY";
@@ -116,8 +22,8 @@ Let's think step by step:
 
     public void OnClickSend()
     {
+        CaptureImage();
         StartCoroutine(PostImageQueryRequest());
-
     }
 
     IEnumerator PostImageQueryRequest()
@@ -154,8 +60,9 @@ Let's think step by step:
             else
             {
                 Debug.Log("Response: " + webRequest.downloadHandler.text);
-
-                outputText.text = webRequest.downloadHandler.text;
+                
+                outputText.text = ParseJson(webRequest.downloadHandler.text, "content").Split(",")[1];
+                counter.SetCounterValue(counter.GetCounterValue()+int.Parse(ParseJson(webRequest.downloadHandler.text, "content").Split(",")[0]));
             }
         }
     }
@@ -204,4 +111,45 @@ Let's think step by step:
         // Convert the byte array to a Base64 string
         return System.Convert.ToBase64String(bytes);
     }
+
+    public string ParseJson(string json, string key)
+    {
+        string jsonResponse = json;
+
+        // Ensure the key exists in the JSON (e.g., "object", "CO2_emission")
+        int startIndex = jsonResponse.IndexOf("\"" + key + "\"");
+
+        if (startIndex != -1)
+        {
+            // Move past the key and find the colon
+            startIndex = jsonResponse.IndexOf(':', startIndex) + 1;
+
+            // Trim spaces and quotation marks to handle JSON formatting
+            string trimmedResponse = jsonResponse.Substring(startIndex).Trim();
+
+            // Check if the value is surrounded by quotes (for strings like "object")
+            if (trimmedResponse[0] == '"')
+            {
+                // Find the end quote for the string value
+                int endIndex = trimmedResponse.IndexOf('"', 1);
+                string contentValue = trimmedResponse.Substring(1, endIndex - 1); // Extract the value
+                Debug.Log(key + ": " + contentValue);
+                return contentValue;
+            }
+            else
+            {
+                // If it's not a string, extract until the next comma or closing brace
+                int endIndex = trimmedResponse.IndexOfAny(new char[] { ',', '}' });
+                string contentValue = trimmedResponse.Substring(0, endIndex).Trim();
+                Debug.Log(key + ": " + contentValue);
+                return contentValue;
+            }
+        }
+        else
+        {
+            Debug.Log(key + " key not found.");
+            return null;
+        }
+    }
+
 }

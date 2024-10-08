@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Master_Counter : MonoBehaviour
+public class Master_Counter2 : MonoBehaviour
 {
 #if UNITY_EDITOR
         [StyledString(12,1,1,1)]
@@ -48,6 +48,7 @@ public class Master_Counter : MonoBehaviour
     public void SetCounterValue(int newCounterValue)
     {
         counterValue = newCounterValue;
+        counterValueStrg = counterValue.ToString();
     }
 
     public int GetCounterValue()
