@@ -1,19 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
+using System.Collections;
 using System.Net;
 using Unity.Netcode.Transports.UTP;
 
 public class NetworkManagerUI : MonoBehaviour
 {
-    public Button hostButton;  // Button für den Host
-    public Button clientButton;  // Button für den Client
-    public Button backButton;  // Button zum Zurückkehren zur Auswahl
-    public Button enterButton;  // Button zum Verbinden nach Eingabe der IP
-    public InputField ipInputField;  // Eingabefeld für die IP-Adresse
-    public Text hostIpText;  // Text für die Host-IP-Anzeige
+    public Button hostButton;       // Button für den Host
+    public Button clientButton;     // Button für den Client
+    public Button backButton;       // Button zum Zurückkehren zur Auswahl
+    public Button enterButton;      // Button zum Verbinden nach Eingabe der IP
+    public InputField ipInputField; // Eingabefeld für die IP-Adresse
+    public Text hostIpText;         // Text für die Host-IP-Anzeige
+    public Text statusText;         // Text für den Verbindungsstatus (z.B. "Connected")
 
     private UnityTransport transport;
+
+    private bool isConnected = false;
 
     void Start()
     {
@@ -31,6 +35,7 @@ public class NetworkManagerUI : MonoBehaviour
         enterButton.gameObject.SetActive(false);   // Enter-Button versteckt
         hostIpText.gameObject.SetActive(false);    // Host-IP-Anzeige versteckt
         backButton.gameObject.SetActive(false);    // Back-Button versteckt
+        statusText.gameObject.SetActive(false);    // Status-Text versteckt
     }
 
     public void StartHost()
@@ -48,6 +53,9 @@ public class NetworkManagerUI : MonoBehaviour
 
         // Back-Button anzeigen
         backButton.gameObject.SetActive(true);
+
+        // Starte Überprüfung für "connected"
+        StartCoroutine(CheckForConnection());
     }
 
     public void ShowClientInput()
@@ -69,7 +77,7 @@ public class NetworkManagerUI : MonoBehaviour
         // Stelle sicher, dass die IP-Adresse eingegeben wurde
         if (!string.IsNullOrEmpty(ipInputField.text))
         {
-            // Transportverbindung setzen
+            // Setze die eingegebene IP-Adresse in den UnityTransport
             transport.ConnectionData.Address = ipInputField.text;
 
             // Starte den Client
@@ -78,6 +86,9 @@ public class NetworkManagerUI : MonoBehaviour
             // IP-Eingabefeld und Enter-Button verstecken
             ipInputField.gameObject.SetActive(false);
             enterButton.gameObject.SetActive(false);
+
+            // Starte Überprüfung für "connected"
+            StartCoroutine(CheckForConnection());
         }
         else
         {
@@ -106,9 +117,50 @@ public class NetworkManagerUI : MonoBehaviour
         hostIpText.gameObject.SetActive(false);
         enterButton.gameObject.SetActive(false);
         backButton.gameObject.SetActive(false);  // Back-Button ausblenden
+        statusText.gameObject.SetActive(false);  // Status-Text ausblenden
+
+        // Stoppe die "Connection working"-Überprüfung
+        StopCoroutine(CheckForConnection());
     }
 
-    // Methode zur Ermittlung der lokalen IP-Adresse
+    // Coroutine zur Überprüfung, ob die Verbindung hergestellt ist
+    private IEnumerator CheckForConnection()
+    {
+        while (true)
+        {
+            // Warte auf den Verbindungsaufbau
+            if (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost)
+            {
+                // Setze den Verbindungsstatus
+                isConnected = true;
+
+                // Zeige "Connected" für 2 Sekunden
+                statusText.text = "Connected";
+                statusText.gameObject.SetActive(true);
+
+                yield return new WaitForSeconds(2f);
+                statusText.gameObject.SetActive(false);
+
+                // Starte die "Connection working"-Überprüfung
+                StartCoroutine(ConnectionWorkingLog());
+                yield break; // Beende die Schleife, da die Verbindung hergestellt wurde
+            }
+
+            yield return null;
+        }
+    }
+
+    // Coroutine zum Protokollieren von "Connection working" alle 10 Sekunden
+    private IEnumerator ConnectionWorkingLog()
+    {
+        while (isConnected)
+        {
+            Debug.Log("Connection working");
+            yield return new WaitForSeconds(10f);
+        }
+    }
+
+    // Methode zur Ermittlung der lokalen IP-Adresse des Hosts
     private string GetLocalIPAddress()
     {
         string localIP = "";
