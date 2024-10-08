@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Netcode;
@@ -18,59 +17,57 @@ public class MultiplayerTimer : NetworkBehaviour
     public float timerLimit = 0f;
 
     private bool isGameOver = false;
+    private bool isClientConnected = false;
 
     void Start()
     {
-        // Wenn es ein Host ist, setze den Timer auf den Startwert
+        // Timer wird nicht direkt gestartet, sondern wartet auf die Verbindung
         if (IsServer)
         {
-            if (countDown)
-                currentTime.Value = timerLimit; // Wenn der Timer herunterz�hlen soll
-            else
-                currentTime.Value = 0f; // Wenn der Timer hochz�hlen soll
+            currentTime.Value = countDown ? timerLimit : 0f; // Initialer Timerwert
         }
     }
 
     void Update()
     {
-        // Nur der Host steuert den Timer
-        if (IsServer && !isGameOver)
+        // Starte den Timer erst, wenn der Client verbunden ist
+        if (IsServer && isClientConnected && !isGameOver)
         {
-            // Z�hle den Timer herunter oder hoch
+            // Timer logik, herunterzählen oder hochzählen
             currentTime.Value = countDown ? currentTime.Value -= Time.deltaTime : currentTime.Value += Time.deltaTime;
 
             // �berpr�fe, ob der Timer das Limit erreicht hat
             if (hasLimit && ((countDown && currentTime.Value <= 0f) || (!countDown && currentTime.Value >= timerLimit)))
             {
-                // Wenn das Limit erreicht ist, stelle sicher, dass der Timer nicht weiterl�uft
+                // Timer beenden
                 currentTime.Value = countDown ? 0f : timerLimit;
-
-                // Zeige Game Over auf beiden Ger�ten
                 GameOverClientRpc();
-
-                // Timer deaktivieren
                 isGameOver = true;
             }
         }
 
-        // Aktualisiere die Anzeige des Timers auf allen Clients
+        // Timer-Text aktualisieren
         SetTimerText();
     }
 
-    // Aktualisiere die Textanzeige des Timers
+    // Methode zum Starten des Timers nach Verbindungsherstellung
+    public void StartTimer()
+    {
+        isClientConnected = true; // Client ist verbunden, Timer kann gestartet werden
+    }
+
+    // Textanzeige des Timers aktualisieren
     void SetTimerText()
     {
         timerText.text = currentTime.Value.ToString("0.0");
     }
 
-    // Diese RPC sendet die "Game Over"-Nachricht an alle Clients
+    // Game Over RPC für alle Clients
     [ClientRpc]
     void GameOverClientRpc()
     {
-        // Zeige "Game Over" auf beiden Ger�ten an
         timerText.text = "Game Over";
         timerText.color = Color.red;
-
         Debug.Log("Game Over");
     }
 }
