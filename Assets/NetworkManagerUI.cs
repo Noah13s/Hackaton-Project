@@ -11,7 +11,7 @@ public class NetworkManagerUI : MonoBehaviour
     public Button clientButton;     // Button für den Client
     public Button backButton;       // Button zum Zurückkehren zur Auswahl
     public Button enterButton;      // Button zum Verbinden nach Eingabe der IP
-    public Button startButton;      // Button zum Starten des Timers
+    public Button startButton;      // Button zum Starten des Timers (nur für den Host sichtbar)
     public InputField ipInputField; // Eingabefeld für die IP-Adresse
     public Text hostIpText;         // Text für die Host-IP-Anzeige
     public Text statusText;         // Text für den Verbindungsstatus (z.B. "Connected")
@@ -41,7 +41,7 @@ public class NetworkManagerUI : MonoBehaviour
         enterButton.gameObject.SetActive(false);   // Enter-Button versteckt
         hostIpText.gameObject.SetActive(false);    // Host-IP-Anzeige versteckt
         backButton.gameObject.SetActive(false);    // Back-Button versteckt
-        startButton.gameObject.SetActive(false);   // Start-Button versteckt
+        startButton.gameObject.SetActive(false);   // Start-Button versteckt (Host-only)
         statusText.gameObject.SetActive(false);    // Status-Text versteckt
     }
 
@@ -151,10 +151,10 @@ public class NetworkManagerUI : MonoBehaviour
                 isClientConnected = true;  // Client ist verbunden
             }
 
-            if (isHostConnected && isClientConnected)
+            // Nur der Host soll den Start-Button sehen, wenn beide verbunden sind
+            if (isHostConnected && isClientConnected && NetworkManager.Singleton.IsHost)
             {
-                // Wenn beide verbunden sind, zeige den Start-Button
-                startButton.gameObject.SetActive(true);
+                startButton.gameObject.SetActive(true); // Zeige den Start-Button nur für den Host
                 yield break;
             }
 
@@ -162,7 +162,7 @@ public class NetworkManagerUI : MonoBehaviour
         }
     }
 
-    // Startet den Timer, wenn der Start-Button gedrückt wird
+    // Startet den Timer, wenn der Start-Button gedrückt wird (nur für den Host)
     public void StartTimer()
     {
         if (isHostConnected && isClientConnected)
