@@ -66,6 +66,7 @@
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Scripts\ARManipulator.cs" />
     <Compile Include="Assets\ButtonScript.cs" />
     <Compile Include="Assets\Samples\Tech Art Library\0.0.2\AR\Scripts\ARSpawner.cs" />
+    <Compile Include="Assets\Scripts\MultiplayerTimer.cs" />
     <Compile Include="Assets\Scripts\PlayerInputController.cs" />
     <Compile Include="Assets\Scripts\MultiPlayerScoreManager.cs" />
     <Compile Include="Assets\AIVision.cs" />
