@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.Netcode;
 
-public class Time_Limit : NetworkBehaviour
+public class MultiplayerTimer : NetworkBehaviour
 {
     [Header("Component")]
     public TextMeshProUGUI timerText;
@@ -25,9 +25,9 @@ public class Time_Limit : NetworkBehaviour
         if (IsServer)
         {
             if (countDown)
-                currentTime.Value = timerLimit; // Wenn der Timer herunterzählen soll
+                currentTime.Value = timerLimit; // Wenn der Timer herunterzï¿½hlen soll
             else
-                currentTime.Value = 0f; // Wenn der Timer hochzählen soll
+                currentTime.Value = 0f; // Wenn der Timer hochzï¿½hlen soll
         }
     }
 
@@ -36,16 +36,16 @@ public class Time_Limit : NetworkBehaviour
         // Nur der Host steuert den Timer
         if (IsServer && !isGameOver)
         {
-            // Zähle den Timer herunter oder hoch
+            // Zï¿½hle den Timer herunter oder hoch
             currentTime.Value = countDown ? currentTime.Value -= Time.deltaTime : currentTime.Value += Time.deltaTime;
 
-            // Überprüfe, ob der Timer das Limit erreicht hat
+            // ï¿½berprï¿½fe, ob der Timer das Limit erreicht hat
             if (hasLimit && ((countDown && currentTime.Value <= 0f) || (!countDown && currentTime.Value >= timerLimit)))
             {
-                // Wenn das Limit erreicht ist, stelle sicher, dass der Timer nicht weiterläuft
+                // Wenn das Limit erreicht ist, stelle sicher, dass der Timer nicht weiterlï¿½uft
                 currentTime.Value = countDown ? 0f : timerLimit;
 
-                // Zeige Game Over auf beiden Geräten
+                // Zeige Game Over auf beiden Gerï¿½ten
                 GameOverClientRpc();
 
                 // Timer deaktivieren
@@ -67,7 +67,7 @@ public class Time_Limit : NetworkBehaviour
     [ClientRpc]
     void GameOverClientRpc()
     {
-        // Zeige "Game Over" auf beiden Geräten an
+        // Zeige "Game Over" auf beiden Gerï¿½ten an
         timerText.text = "Game Over";
         timerText.color = Color.red;
 
